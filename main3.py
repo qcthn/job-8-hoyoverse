@@ -451,20 +451,42 @@ def register_account(alias: str, proxy: dict, profile_path: str, api_key: str, e
     chrome_driver_path = os.path.abspath("chromedriver-win64/chromedriver.exe")
     service = Service(executable_path=chrome_driver_path, log_path="chromedriver.log")
     
-    chrome_options = Options()
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--remote-debugging-port=9222")
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+    # chrome_options = Options()
+    # chrome_options.add_argument("--no-sandbox")
+    # chrome_options.add_argument("--disable-dev-shm-usage")
+    # chrome_options.add_argument("--disable-gpu")
+    # chrome_options.add_argument("--remote-debugging-port=9222")
+    # chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     
-    if proxy:
-        proxy_str = f"{proxy['host']}:{proxy['httpPort']}"
-        chrome_options.add_argument(f"--proxy-server={proxy_str}")
-        print(f"Đang sử dụng proxy: {proxy_str}")
+    # if proxy:
+    #     proxy_str = f"{proxy['host']}:{proxy['httpPort']}"
+    #     chrome_options.add_argument(f"--proxy-server={proxy_str}")
+    #     print(f"Đang sử dụng proxy: {proxy_str}")
     
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    wait = WebDriverWait(driver, 15)  # Tăng thời gian chờ lên 15 giây
+    # driver = webdriver.Chrome(service=service, options=chrome_options)
+    # wait = WebDriverWait(driver, 15)  # Tăng thời gian chờ lên 15 giây
+     try:
+        chrome_options = Options()
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        
+        # Thêm headless mode cho môi trường cloud
+        chrome_options.add_argument("--headless")
+        
+        if proxy:
+            proxy_str = f"{proxy['host']}:{proxy['httpPort']}"
+            chrome_options.add_argument(f"--proxy-server={proxy_str}")
+            print(f"Đang sử dụng proxy: {proxy_str}")
+        
+        # Sử dụng webdriver-manager để tải ChromeDriver phù hợp với hệ thống
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        wait = WebDriverWait(driver, 15)
+    except Exception as driver_error:
+        print(f"Lỗi khởi tạo ChromeDriver: {driver_error}")
+        return False, f"Lỗi khởi tạo ChromeDriver: {driver_error}"
     
     try:
         print(f"Bắt đầu đăng ký tài khoản với email: {alias}")
