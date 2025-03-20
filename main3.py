@@ -465,7 +465,7 @@ def register_account(alias: str, proxy: dict, profile_path: str, api_key: str, e
     
     # driver = webdriver.Chrome(service=service, options=chrome_options)
     # wait = WebDriverWait(driver, 15)  # Tăng thời gian chờ lên 15 giây
-     try:
+    try:
         chrome_options = Options()
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
