@@ -775,24 +775,24 @@ st.sidebar.title("Hoyoverse Account Generator")
 
 # Cấu hình email - Phần nhập thông tin email
 st.sidebar.header("Email Configuration")
-# email_address = st.sidebar.text_input("Gmail Address", placeholder="21520473@gm.uit.edu.vn")
-email_address ="21520473@gm.uit.edu.vn"
-# email_password = st.sidebar.text_input("App Password", type="password", 
-#                                       help="Use an App Password from Google Account > Security > App Passwords")
-email_password = "nlxxufzuvztcwwgf"
+email_address = st.sidebar.text_input("Gmail Address", placeholder="your@gmail.com")
+
+email_password = st.sidebar.text_input("App Password", type="password", 
+                                      help="Use an App Password from Google Account > Security > App Passwords")
+
 
 # Cấu hình proxy - Phần nhập thông tin proxy
 st.sidebar.header("Proxy Configuration")
-# proxy_api_keys = st.sidebar.text_area("KiotProxy API Keys (One per line)", 
-#                                      placeholder="Enter your API keys here")
-proxy_api_keys = "K9d4f6afec2a0469abc82e6c2fbc8d358"
+proxy_api_keys = st.sidebar.text_area("KiotProxy API Keys (One per line)", 
+                                 placeholder="Enter your API keys here")
+
 proxy_region = st.sidebar.selectbox("Proxy Region", 
                                    ["random", "Vietnam", "ha_noi", "ho_chi_minh", "hai_phong", "da_nang"])
 
 # Khóa API Captcha - Phần nhập API key của 2Captcha
 st.sidebar.header("Captcha Solver")
-# captcha_api_key = st.sidebar.text_input("2Captcha API Key", type="password")
-captcha_api_key = "600cf8b7a266de9b5c4f31f71672ceca"
+captcha_api_key = st.sidebar.text_input("2Captcha API Key", type="password")
+
 
 # Cấu hình tài khoản - Phần nhập số lượng tài khoản cần tạo
 st.sidebar.header("Account Settings")
